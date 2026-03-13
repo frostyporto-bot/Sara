@@ -1,383 +1,402 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu presente pra vc, meu amor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu presente pra vc, meu amor</title>
 
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: black;
-      font-family: Arial, sans-serif;
-    }
+<!-- Fonte melancólica do Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-    canvas {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 2.5s ease;
-    }
+<style>
 
-    .intro {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      background: radial-gradient(circle at top, #12002b, black 80%);
-      z-index: 20;
-      opacity: 1;
-      transition: opacity 2.5s ease;
-      padding: 20px;
-    }
+body{
+margin:0;
+overflow:hidden;
+background:black;
+font-family:Arial, sans-serif;
+}
 
-    .intro h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      text-shadow: 0 0 25px rgba(255,255,255,0.8);
-      animation: glow 2s infinite alternate;
-    }
+canvas{
+position:absolute;
+inset:0;
+opacity:0;
+transition:opacity 2.5s ease;
+}
 
-    @keyframes glow {
-      from { opacity: 0.7; }
-      to   { opacity: 1; }
-    }
+.intro{
+position:absolute;
+inset:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+background:radial-gradient(circle at top,#12002b,black 80%);
+z-index:20;
+opacity:1;
+transition:opacity 2.5s ease;
+padding:20px;
+}
 
-    .intro p {
-      font-size: 1.3rem;
-      opacity: 0.8;
-      max-width: 550px;
-      margin-bottom: 25px;
-      line-height: 1.6;
-    }
+.intro h1{
+font-size:3rem;
+margin-bottom:15px;
+text-shadow:0 0 25px rgba(255,255,255,0.8);
+animation:glow 2s infinite alternate;
+}
 
-    .credits {
-      font-size: 1rem;
-      opacity: 0.5;
-      margin-bottom: 35px;
-    }
+@keyframes glow{
+from{opacity:0.7;}
+to{opacity:1;}
+}
 
-    .intro button {
-      padding: 16px 45px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 40px;
-      cursor: pointer;
-      background: linear-gradient(90deg, #ffffff, #cfcfcf);
-      color: black;
-      font-weight: bold;
-      box-shadow: 0 0 25px rgba(255,255,255,0.4);
-      transition: 0.3s;
-    }
+.intro p{
+font-size:1.3rem;
+opacity:0.8;
+max-width:550px;
+margin-bottom:25px;
+line-height:1.6;
+}
 
-    .intro button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 45px rgba(255,255,255,0.7);
-    }
+.credits{
+font-size:1rem;
+opacity:0.5;
+margin-bottom:35px;
+}
 
-    .finalBox {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 30;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 2s ease;
-    }
+.intro button{
+padding:16px 45px;
+font-size:1.2rem;
+border:none;
+border-radius:40px;
+cursor:pointer;
+background:linear-gradient(90deg,#ffffff,#cfcfcf);
+color:black;
+font-weight:bold;
+box-shadow:0 0 25px rgba(255,255,255,0.4);
+transition:0.3s;
+}
 
-    .finalCard {
-      background: rgba(0,0,0,0.75);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 0 40px rgba(255,255,255,0.2);
-      backdrop-filter: blur(8px);
-    }
+.intro button:hover{
+transform:scale(1.1);
+}
 
-    .finalCard h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
+.finalBox{
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:30;
+opacity:0;
+pointer-events:none;
+transition:opacity 2s ease;
+flex-direction:column;
+}
 
-    .finalCard button {
-      margin: 10px;
-      padding: 12px 28px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.finalCard{
+background:rgba(0,0,0,0.75);
+border:1px solid rgba(255,255,255,0.2);
+padding:40px;
+border-radius:20px;
+text-align:center;
+color:white;
+box-shadow:0 0 40px rgba(255,255,255,0.2);
+margin-bottom:20px;
+opacity:0;
+transition:opacity 1s ease;
+}
 
-    .yes {
-      background: white;
-      color: black;
-    }
+.finalCard h2{
+font-size:2rem;
+margin-bottom:20px;
+}
 
-    .no {
-      background: rgba(255,0,0,0.7);
-      color: white;
-      position: relative;
-    }
+.finalCard button{
+margin:10px;
+padding:12px 28px;
+font-size:1.1rem;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-weight:bold;
+}
 
-    .goodMessage {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      color: white;
-      opacity: 0;
-      transition: opacity 2s ease;
-      z-index: 40;
-      pointer-events: none;
-      text-shadow: 0 0 25px rgba(255,255,255,0.8);
-      padding: 30px;
-      text-align: center;
-    }
-  </style>
+.yes{
+background:white;
+color:black;
+}
+
+.no{
+background:rgba(255,0,0,0.7);
+color:white;
+position:relative;
+}
+
+.goodMessage{
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:2rem;
+color:white;
+opacity:0;
+transition:opacity 2s ease;
+z-index:40;
+pointer-events:none;
+text-shadow:0 0 25px rgba(255,255,255,0.8);
+padding:30px;
+text-align:center;
+}
+
+/* TEXTO FINAL */
+
+.loveText{
+position:absolute;
+bottom:0%;
+width:100%;
+text-align:center;
+color:white;
+font-size:1.4rem;
+line-height:1.8;
+padding:40px;
+max-width:800px;
+margin:auto;
+left:0;
+right:0;
+opacity:0;
+z-index:50;
+text-shadow:0 0 10px white,0 0 20px white,0 0 35px rgba(255,255,255,0.9);
+font-family: 'Playfair Display', serif;
+transform:translateY(50%);
+transition:transform 3s ease, opacity 3s ease;
+}
+
+.loveText.show{
+opacity:1;
+transform:translateY(0);
+animation:blink 2s infinite alternate;
+}
+
+@keyframes blink{
+0% { text-shadow:0 0 10px white,0 0 20px white,0 0 35px rgba(255,255,255,0.9); }
+50% { text-shadow:0 0 15px white,0 0 25px white,0 0 45px rgba(255,255,255,1); }
+100% { text-shadow:0 0 10px white,0 0 20px white,0 0 35px rgba(255,255,255,0.9); }
+}
+
+/* TEXTO INTERMEDIÁRIO */
+
+.intermediateText{
+opacity:0;
+color:white;
+font-size:1.5rem;
+line-height:1.6;
+text-align:center;
+padding:20px;
+max-width:700px;
+margin-bottom:20px;
+transition:opacity 2s ease;
+font-family: 'Playfair Display', serif;
+}
+
+/* FADE FINAL */
+
+.fadeFinal{
+position:absolute;
+inset:0;
+background:black;
+opacity:0;
+transition:opacity 6s ease;
+z-index:100;
+pointer-events:none;
+}
+
+.fadeFinal.show{
+opacity:1;
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="intro" id="intro">
-    <h1>Porque sei que gosta do Universo</h1>
-    <p>
-      Então resolvi presenteá-la com o que gosta<br>
-      Feliz aniversário, meu bem.
-    </p>
+<div class="intro" id="intro">
 
-    <div class="credits">
-      De Ezequiel para Sara
-    </div>
+<h1>Porque sei que gosta do Universo</h1>
 
-    <button id="startBtn">Podemos?</button>
-  </div>
+<p>
+Então resolvi presenteá-la com o que gosta<br>
+Feliz aniversário, meu bem.
+</p>
 
-  <canvas id="space"></canvas>
+<div class="credits">
+De Ezequiel para Sara
+</div>
 
-  <div class="finalBox" id="finalBox">
-    <div class="finalCard">
-      <h2>Gostou do presente?</h2>
-      <button class="yes" id="yesBtn">Sim</button>
-      <button class="no" id="noBtn">Não</button>
-    </div>
-  </div>
+<button id="startBtn">Podemos?</button>
 
-  <div class="goodMessage" id="goodMessage">
-    Que bom, amor... espero poder te levar um dia para fazer essa viagem de verdade. eu amo você
-  </div>
+</div>
 
-  <audio id="ambience" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c2dbb6c38.mp3?filename=space-atmosphere-ambient-110397.mp3">
-  </audio>
+<canvas id="space"></canvas>
 
-  <script>
-    const intro = document.getElementById("intro");
-    const startBtn = document.getElementById("startBtn");
+<div class="finalBox" id="finalBox">
 
-    const canvas = document.getElementById("space");
-    const ctx = canvas.getContext("2d");
+<div class="intermediateText" id="intermediateText">
+Espero que essa pequena viagem pelo universo tenha feito você sorrir. Cada estrela é um lembrete do quanto você é especial para mim.
+</div>
 
-    const audio = document.getElementById("ambience");
+<div class="finalCard" id="finalCard">
+<h2>Gostou do presente?</h2>
+<button class="yes" id="yesBtn">Sim</button>
+<button class="no" id="noBtn">Não</button>
+</div>
 
-    const finalBox = document.getElementById("finalBox");
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
+</div>
 
-    const goodMessage = document.getElementById("goodMessage");
+<div class="goodMessage" id="goodMessage">
+Que bom, amor... espero poder te levar um dia para fazer essa viagem de verdade. eu amo você
+</div>
 
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+<div class="loveText" id="loveText">
 
-    let stars = [];
-    let dust = [];
-    let meteors = [];
+Às vezes eu paro pra pensar em como eu tive sorte de ter você. Não é só sobre você ser linda, porque isso todo mundo percebe, é sobre o jeito que a sua beleza parece ir além do que dá pra explicar. Tem algo em você que chama atenção de um jeito diferente, como quando a gente olha pro céu cheio de estrelas e fica alguns segundos em silêncio só admirando.
 
-    const starColors = ["white", "#ffe9a6", "#a6d8ff", "#ffb3b3"];
+<br><br>
 
-    function createStars() {
-      stars = [];
-      for (let i = 0; i < 900; i++) {
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          z: Math.random() * canvas.width,
-          color: starColors[Math.floor(Math.random() * starColors.length)]
-        });
-      }
-    }
+Você é linda de um jeito que não é só aparência. É no seu sorriso, no seu olhar, no jeito que você fala, no jeito que você existe. É como se a sua beleza tivesse a mesma calma e imensidão do universo.
 
-    function createDust() {
-      dust = [];
-      for (let i = 0; i < 200; i++) {
-        dust.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          z: Math.random() * canvas.width,
-          opacity: Math.random() * 0.12
-        });
-      }
-    }
+<br><br>
 
-    function spawnMeteor() {
-      meteors.push({
-        x: Math.random() * canvas.width,
-        y: -200,
-        vx: 2,
-        vy: 3
-      });
-    }
+E quanto mais eu te conheço, mais eu percebo que a parte mais bonita de você nem é o que dá pra ver de primeira.
 
-    setInterval(() => {
-      if (meteors.length < 1) spawnMeteor();
-    }, 7500);
+<br><br>
 
-    function drawNebula() {
-      let gradient = ctx.createRadialGradient(
-        canvas.width * 0.3,
-        canvas.height * 0.4,
-        50,
-        canvas.width * 0.3,
-        canvas.height * 0.4,
-        700
-      );
+Se o universo é cheio de coisas incríveis, você com certeza é uma delas. Eu te amo princesa.
 
-      gradient.addColorStop(0, "rgba(120,50,200,0.18)");
-      gradient.addColorStop(0.5, "rgba(50,150,255,0.06)");
-      gradient.addColorStop(1, "rgba(0,0,0,0)");
+</div>
 
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
+<div class="fadeFinal" id="fadeFinal"></div>
 
-    function animate() {
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+<script>
 
-      drawNebula();
+const intro=document.getElementById("intro");
+const startBtn=document.getElementById("startBtn");
 
-      let cx = canvas.width / 2;
-      let cy = canvas.height / 2;
+const canvas=document.getElementById("space");
+const ctx=canvas.getContext("2d");
 
-      dust.forEach(p => {
-        p.z -= 2;
-        if (p.z <= 0) p.z = canvas.width;
+const finalBox=document.getElementById("finalBox");
+const intermediateText=document.getElementById("intermediateText");
+const finalCard=document.getElementById("finalCard");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
 
-        let sx = (p.x - cx) * (canvas.width / p.z) + cx;
-        let sy = (p.y - cy) * (canvas.width / p.z) + cy;
+const goodMessage=document.getElementById("goodMessage");
+const loveText=document.getElementById("loveText");
+const fadeFinal=document.getElementById("fadeFinal");
 
-        ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
-        ctx.beginPath();
-        ctx.arc(sx, sy, 2, 0, Math.PI * 2);
-        ctx.fill();
-      });
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
-      stars.forEach(star => {
-        star.z -= 4;
-        if (star.z <= 0) {
-          star.z = canvas.width;
-          star.x = Math.random() * canvas.width;
-          star.y = Math.random() * canvas.height;
-        }
+let stars=[];
 
-        let sx = (star.x - cx) * (canvas.width / star.z) + cx;
-        let sy = (star.y - cy) * (canvas.width / star.z) + cy;
+function createStars(){
+stars=[];
+for(let i=0;i<900;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+z:Math.random()*canvas.width
+});
+}
+}
 
-        let size = (1 - star.z / canvas.width) * 2.5;
+function animate(){
 
-        ctx.fillStyle = star.color;
-        ctx.beginPath();
-        ctx.arc(sx, sy, size, 0, Math.PI * 2);
-        ctx.fill();
-      });
+ctx.fillStyle="black";
+ctx.fillRect(0,0,canvas.width,canvas.height);
 
-      meteors.forEach((m, index) => {
-        m.x += m.vx;
-        m.y += m.vy;
+let cx=canvas.width/2;
+let cy=canvas.height/2;
 
-        let grad = ctx.createLinearGradient(
-          m.x, m.y,
-          m.x - 200, m.y - 200
-        );
+stars.forEach(star=>{
 
-        grad.addColorStop(0, "white");
-        grad.addColorStop(0.3, "yellow");
-        grad.addColorStop(0.6, "orange");
-        grad.addColorStop(1, "transparent");
+star.z-=4;
 
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 4;
+if(star.z<=0){
+star.z=canvas.width;
+star.x=Math.random()*canvas.width;
+star.y=Math.random()*canvas.height;
+}
 
-        ctx.beginPath();
-        ctx.moveTo(m.x, m.y);
-        ctx.lineTo(m.x - 220, m.y - 220);
-        ctx.stroke();
+let sx=(star.x-cx)*(canvas.width/star.z)+cx;
+let sy=(star.y-cy)*(canvas.width/star.z)+cy;
 
-        if (m.y > canvas.height + 400) {
-          meteors.splice(index, 1);
-        }
-      });
+let size=(1-star.z/canvas.width)*2.5;
 
-      requestAnimationFrame(animate);
-    }
+ctx.fillStyle="white";
 
-    startBtn.addEventListener("click", () => {
-      audio.play();
+ctx.beginPath();
+ctx.arc(sx,sy,size,0,Math.PI*2);
+ctx.fill();
 
-      intro.style.opacity = "0";
-      canvas.style.opacity = "1";
+});
 
-      setTimeout(() => {
-        intro.style.display = "none";
-      }, 2500);
+requestAnimationFrame(animate);
 
-      createStars();
-      createDust();
-      animate();
+}
 
-      setTimeout(() => {
-        finalBox.style.opacity = "1";
-        finalBox.style.pointerEvents = "auto";
-      }, 10000);
-    });
+startBtn.addEventListener("click",()=>{
 
-    yesBtn.addEventListener("click", () => {
-      finalBox.style.opacity = "0";
-      finalBox.style.pointerEvents = "none";
+intro.style.opacity="0";
+canvas.style.opacity="1";
 
-      setTimeout(() => {
-        goodMessage.style.opacity = "1";
-      }, 1500);
+setTimeout(()=>{ intro.style.display="none"; },2500);
 
-      setTimeout(() => {
-        goodMessage.style.opacity = "0";
-      }, 6000);
-    });
+createStars();
+animate();
 
-    noBtn.addEventListener("mouseover", () => {
-      noBtn.style.left = Math.random() * 200 - 100 + "px";
-      noBtn.style.top = Math.random() * 200 - 100 + "px";
-    });
+setTimeout(()=>{ 
+finalBox.style.opacity="1";
+finalBox.style.pointerEvents="auto";
 
-    window.addEventListener("resize", () => {
-      canvas.width = innerWidth;
-      canvas.height = innerHeight;
-      createStars();
-      createDust();
-    });
-  </script>
+intermediateText.style.opacity="1"; // aparece texto intermediário
+
+setTimeout(()=>{
+  intermediateText.style.opacity="0"; // esconde depois de 4s
+  finalCard.style.opacity="1"; // pergunta aparece
+},4000);
+
+},10000);
+
+});
+
+yesBtn.addEventListener("click",()=>{
+
+finalCard.style.opacity="0";
+finalBox.style.pointerEvents="none";
+
+setTimeout(()=>{ 
+loveText.classList.add("show"); // texto final aparece com efeito de brilho
+},500);
+
+setTimeout(()=>{ 
+fadeFinal.classList.add("show"); // fade final
+},15000);
+
+});
+
+noBtn.addEventListener("mouseover",()=>{
+
+noBtn.style.left=Math.random()*200-100+"px";
+noBtn.style.top=Math.random()*200-100+"px";
+
+});
+
+</script>
 
 </body>
 </html>
-
